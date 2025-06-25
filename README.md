@@ -1,4 +1,13 @@
-# Operator screen
+# Operator screen example
+
+This urCap is a small example of an operator screen urCapx for Polyscope X, showcasing the operator screen capabilities for a machine tending setup, where different formats can be configured.
+Due to a small bug in the script generation capabilities, currently the whole data model is stored on the back-end and data is retrieved at runtime.
+
+Currently available capabilities:
+
+- Teaching waypoints and inputting data via the operator screen
+- Docker backend using xml-rpc to communicate with robot program and front-end
+- Operator screen reacts to program state (paly/pause/stop)
 
 # Angular contribution
 
