@@ -1,0 +1,10 @@
+{
+  "application": {
+    "nodes": {
+      "ur-alumotionscreen-alumotionscreen": {
+        "title": "Alumotionscreen",
+        "supportiveText": "Alumotionscreen - Supportive Text"
+      }
+    }
+  }
+}

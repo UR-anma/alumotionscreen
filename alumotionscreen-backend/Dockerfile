@@ -1,0 +1,9 @@
+FROM python:3.10-alpine
+
+EXPOSE 55510
+
+COPY ./src /home
+
+WORKDIR /home
+
+ENTRYPOINT python3 opscreenWorkerMain.py 

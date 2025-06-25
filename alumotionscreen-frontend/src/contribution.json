@@ -1,0 +1,13 @@
+{
+  "applicationNodes": [],
+  "programNodes": [],
+  "smartSkills": [],
+  "operatorScreens": [
+    {
+      "translationPath": "assets/i18n/",
+      "behaviorURI": "AlumotionScreen.worker.js",
+      "presenterURI": "main.js",
+      "componentTagName": "ur-alumotionscreen-alumotionscreen"
+    }
+  ]
+}

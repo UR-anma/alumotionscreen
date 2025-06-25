@@ -1,0 +1,39 @@
+{
+    "formats": [
+        {
+            "name": "Nuovo formato",
+            "dx": 50,
+            "dy": 50,
+            "nx": 5,
+            "ny": 5,
+            "mass": 1
+        }
+    ],
+    "drawers": [
+        {
+            "number": 1,
+            "abilitato": true
+        },
+        {
+            "number": 2,
+            "abilitato": false
+        },
+        {
+            "number": 3,
+            "abilitato": false
+        },
+        {
+            "number": 4,
+            "abilitato": false
+        },
+        {
+            "number": 5,
+            "abilitato": false
+        },
+        {
+            "number": 6,
+            "abilitato": false
+        }
+    ],
+    "points": {}
+}

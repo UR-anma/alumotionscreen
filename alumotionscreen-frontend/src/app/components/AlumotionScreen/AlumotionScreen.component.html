@@ -1,0 +1,147 @@
+<div *ngIf="operatorScreen" class="component">
+    <div *ngIf="showOpScreen === true">
+        <div class="ur-column ur-justify-center ur-align-center" style="height:60px; width:1120px; margin: 10px; background-color: var(--color-background-level-03); box-shadow:
+        var(--shadow-02); border-radius: var(--border-radius-medium);">
+            <ur-heading type="h1" size="large">Custom operator screen example - Alumotion collaborate 2025</ur-heading>
+        </div>
+
+        <!-- Choice configuration page-->
+        <div *ngIf="showChoice">
+            <div class="ur-row">
+                <div class="ur-column ur-justify-center ur-align-center" style="height:520px; width:300px; background-image: url('/ur/alumotionscreen/alumotionscreen-frontend/assets/ProfeederImage.png'); 
+        background-size: 300px; background-repeat: no-repeat; margin: 10px; background-color: var(--color-background-level-03); 
+        box-shadow: var(--shadow-02); border-radius: var(--border-radius-medium);">
+                    <ur-button type="filled" (clicked)="openProfeederDialog()" [disabled]="!passwordOk">Profeeder
+                        setup</ur-button>
+                </div>
+                <div class=" ur-column ur-align-center ur-justify-center" style="height:520px; width:480px;
+        background-repeat: no-repeat; margin: 10px; background-color: var(--color-background-level-03); box-shadow: var(--shadow-02); 
+        background-image: url('/ur/alumotionscreen/alumotionscreen-frontend/assets/Aluminum-billets.png'); background-size: 500px; background-repeat: no-repeat;
+        border-radius: var(--border-radius-medium);">
+                    <ur-button type="filled" (clicked)="openFormatsDialog()" [disabled]="!passwordOk">Workpiece
+                        setup</ur-button>
+                </div>
+                <div class="ur-column ur-align-center ur-justify-center" style="height:520px; width:300px;
+        background-repeat: no-repeat; margin: 10px; background-color: var(--color-background-level-03); box-shadow: var(--shadow-02); 
+        background-image: url('/ur/alumotionscreen/alumotionscreen-frontend/assets/CNC.jfif'); background-size: 300px; background-repeat: no-repeat;
+        border-radius: var(--border-radius-medium);">
+                    <ur-button type="filled" (clicked)="openMachineDialog()" [disabled]="!passwordOk">Machine
+                        setup</ur-button>
+                </div>
+            </div>
+            <div class="ur-row ur-justify-center">
+                <ur-input placeholder="Enter password" (change)="checkPassword($event)"></ur-input>
+            </div>
+        </div>
+
+        <!-- Formats configuration page-->
+        <div *ngIf="showFormats">
+            <div class="ur-row ur-justify-left ur-align-center">
+                <ur-icon-button icon="arrow-back" active="true" style="--ur-icon-button-color-background:
+                var(--color-background-level-01); --ur-icon-button-color: var(--color-background-level-08);"
+                    (handleClick)="openChoiceDialog()"></ur-icon-button>
+                <ur-heading size="medium">Workpiece</ur-heading>
+            </div>
+            <div class="ur-row" style="height:500px;">
+                <div class="ur-column ur-justify-top" style="width:220px; background-color: var(--color-background-level-03); 
+        box-shadow: var(--shadow-01); border-radius: var(--border-radius-medium); margin: 10px; padding: 15px">
+
+                    <ur-heading size="medium">Formati disponibili</ur-heading>
+                    <div *ngFor="let format of formats; let i=index">
+                        <ur-button type="text" (clicked)="selectFormatFormats(i)">{{format.name}}</ur-button>
+                    </div>
+
+                    <div class="ur-column ur-align-center ur-justify-bottom">
+                        <ur-button icon="plus" size="large" type="filled" (handleClick)="addFormat()">Aggiungi
+                            formato</ur-button>
+                    </div>
+
+                </div>
+                <div class="ur-column ur-justify-center ur-align-center" style="width:250px; margin: 10px; padding: 10px; background-color: var(--color-background-level-03); 
+        box-shadow: var(--shadow-01); border-radius: var(--border-radius-medium);">
+                    <ur-input label="Name" type="text" [value]="formats[formatSelected].name"
+                        (change)="changeFormatProperty($event, 'name')"></ur-input>
+                    <ur-input label="Numero righe" type="text" [value]="formats[formatSelected].ny"
+                        (change)="changeFormatProperty($event, 'ny')"></ur-input>
+                    <ur-input label="Numero colonne" type="text" [value]="formats[formatSelected].nx"
+                        (change)="changeFormatProperty($event, 'nx')"></ur-input>
+                    <ur-input label="Distanza righe - mm" type="text" [value]="formats[formatSelected].dy"
+                        (change)="changeFormatProperty($event, 'dy')"></ur-input>
+                    <ur-input label="Distanza colonne - mm" type="text" [value]="formats[formatSelected].dx"
+                        (change)="changeFormatProperty($event, 'dx')"></ur-input>
+                    <ur-input label="Massa - Kg" type="text" [value]="formats[formatSelected].mass"
+                        (change)="changeFormatProperty($event, 'mass')"></ur-input>
+                    <div class="ur-column ur-align-center ur-justify-bottom">
+                        <ur-button icon="delete" size="large" type="filled" (handleClick)="removeFormat()">Cancella
+                            formato</ur-button>
+                    </div>
+                </div>
+
+                <div class="ur-column ur-justify-center ur-align-center"
+                    style="width:300px; margin: 10px; padding: 10px; background-color: var(--color-background-level-03); 
+        box-shadow: var(--shadow-01); border-radius: var(--border-radius-medium); background: url('/ur/alumotionscreen/alumotionscreen-frontend/assets/Cassetto.png')">
+                    <canvas id="myCanvas" width="500" height="500"></canvas>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Machine configuration page-->
+        <div *ngIf="showMachine">
+            <div class="ur-row ur-justify-left ur-align-center">
+                <ur-icon-button icon="arrow-back" active="true" style="--ur-icon-button-color-background:
+                var(--color-background-level-01); --ur-icon-button-color: var(--color-background-level-08);"
+                    (handleClick)="openChoiceDialog()"></ur-icon-button>
+                <ur-heading size="medium">Machine</ur-heading>
+            </div>
+            <div class="ur-row ur-justify-space-around ur-align-center"
+                style="height:502px; width:1120px; margin: 10px; background-color: var(--color-background-level-03); 
+        box-shadow: var(--shadow-01); border-radius: var(--border-radius-medium); background: url('/ur/alumotionscreen/alumotionscreen-frontend/assets/Machine.jpg')">
+                <ur-button (handleClick)="setFlyPoint($event)">Insegna passaggio
+                    porta</ur-button>
+                <ur-button (handleClick)="setInsertionPoint($event)">Insegna punto
+                    inserimento</ur-button>
+                <ur-button (handleClick)="setBackPoint($event)">Insegna punto uscita</ur-button>
+            </div>
+        </div>
+
+        <!-- Profeeder drawers configuration page-->
+        <div *ngIf="showProfeeder">
+            <div class="ur-row ur-justify-left ur-align-center">
+                <ur-icon-button icon="arrow-back" active="true" style="--ur-icon-button-color-background:
+                var(--color-background-level-01); --ur-icon-button-color: var(--color-background-level-08);"
+                    (handleClick)="openChoiceDialog()"></ur-icon-button>
+                <ur-heading size="medium">Profeeder</ur-heading>
+            </div>
+            <div class="ur-column" style="height:500px; width:750px; margin: 10px; background-color: var(--color-background-level-03); 
+        box-shadow: var(--shadow-01); border-radius: var(--border-radius-medium);">
+                <ur-heading size="medium" style="margin: 10px; padding:5px;">Cassetti disponibili</ur-heading>
+                <div *ngFor="let cassetto of cassetti; let i=index;">
+                    <div class="ur-row ur-justify-left ur-align-center" style=" margin: 5px; padding:5px;">
+                        <ur-heading size="medium">Cassetto {{i+1}}</ur-heading>
+                        <ur-toggle-switch style="padding-left:30px; padding-right: 10px;" label="Abilita"
+                            labelPos="before" (handleToggle)="enableDrawer($event, i)"
+                            [toggled]="cassetti[i].abilitato"></ur-toggle-switch>
+                        <ur-dropdown (selectionChange)="selectFormat($event, i)" style="padding-left: 20px"
+                            placeholder="Scegliere formato" [options]="formatsNames" style="width:200px;"
+                            label="Formato" [disabled]="!cassetti[i].abilitato"
+                            [selectedOption]="cassetti[i].format"></ur-dropdown>
+                        <ur-button style="padding-left: 20px" (handleClick)="setStartPoint($event, i)"
+                            [disabled]="!cassetti[i].abilitato">Insegna
+                            origine</ur-button>
+                        <ur-button style="padding-left: 20px" [disabled]="!cassetti[i].abilitato">Calibra
+                            cassetto</ur-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="showOpScreen === false">
+        <div class="ur-column  ur-justify-center ur-align-center" style="height:600px; width:1100px; margin: 10px; background-color: var(--color-background-level-03); 
+        box-shadow: var(--shadow-01); border-radius: var(--border-radius-medium);">
+            <ur-icon icon="play" size="xlarge"></ur-icon>
+            <ur-heading size="large" style="margin: 10px; padding:5px;">Per configurare la macchina arrestare il
+                programma in esecuzione</ur-heading>
+        </div>
+    </div>
+</div>

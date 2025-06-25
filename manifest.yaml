@@ -1,0 +1,27 @@
+metadata:
+  vendorID: "ur"
+  urcapID: "alumotionscreen"
+  vendorName: "ur"
+  urcapName: "alumotionScreen"
+  version: 0.0.4
+  contactInfo: anma@universal-robots.com
+  description: Sample urCap to showcase operator screen customization in PolyscopeX
+  copyright: Copyright (c) 2009-2025 Universal Robots. All rights reserved.
+  licenseType: Sample license
+artifacts:
+  webArchives:
+    - id: "alumotionscreen-frontend"
+      folder: "alumotionscreen-frontend"
+  containers:
+    - id: "alumotionscreen-backend"
+      image: "alumotionscreen-backend:latest"
+      ingress:
+        - id: xmlrpc
+          containerPort: 55510
+          protocol: http
+          proxyUrl: /
+      mounts:
+        - mount: "persistent:/home/logs"
+          access: "rw"
+        - mount: "persistent:/home/data"
+          access: "rw"
